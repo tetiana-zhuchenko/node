@@ -17,12 +17,19 @@ if (isNaN(linesQty)) {
 
 const writeStream = fs.createWriteStream(path.join('./files', fileName))
 
+console.log('Start', performance.now())
+
 for (let i = 1; i <= linesQty; i++) {
   writeStream.write(
     `This is a line number ${i} in the automatically generated file\n`
   )
 }
+console.log('End', performance.now())
+
+setTimeout(() => console.log('Timeout', performance.now()), 0)
 
 writeStream.end(() => {
-  console.log(`Automatically generated file ${fileName} was created`)
+  console.log(
+    `Automatically generated file ${fileName} with ${linesQty} lines was created`
+  )
 })
